@@ -5,6 +5,8 @@ import org.example.accounts.BaseBankAccount;
 import org.example.accounts.StudentAccount;
 import org.example.customer.Customer;
 import org.example.accounts.SaveAccount;
+import org.example.data.GeneratorUUID;
+import org.example.services.BankAccountService;
 
 public class Main {
 
@@ -27,8 +29,9 @@ public class Main {
 
     private static void testBankAccount(Customer customer)
     {
+        GeneratorUUID gen = new GeneratorUUID();
 
-        BaseBankAccount bankAccount = new BankAccount("b-412","BA1234567890",customer,0.0);
+        BaseBankAccount bankAccount = new BankAccount("b-412",gen.generate(),customer,0.0);
 
         try {
             System.out.println(bankAccount.getUuid() + ": " + bankAccount.getBankAccountNumber());
@@ -43,8 +46,9 @@ public class Main {
 
     private static void testSaveAccount(Customer customer)
     {
+        GeneratorUUID gen = new GeneratorUUID();
 
-        SaveAccount saveAccount = new SaveAccount("s-123","SA1234567890",customer,0);
+        SaveAccount saveAccount = new SaveAccount("s-123",gen.generate(),customer,0);
 
         try {
             System.out.println(saveAccount.getUuid() + ": " + saveAccount.getBankAccountNumber());
@@ -57,12 +61,15 @@ public class Main {
 
     private static void testStudentAccount(Customer customer)
     {
-        StudentAccount studentAccount = new StudentAccount("st-123","ST1234567890",customer,"Delta");
+        GeneratorUUID gen = new GeneratorUUID();
+        BankAccountService bankAccountService = new BankAccountService();
+
+        StudentAccount studentAccount = new StudentAccount("st-123",gen.generate(),customer,"Delta");
 
         try {
-            studentAccount.deposit(5000);
-            studentAccount.withdraw(2500);
-            studentAccount.withdraw(1500);
+            bankAccountService.deposit(studentAccount, 5000);
+            bankAccountService.withdraw(studentAccount, 5000);
+            bankAccountService.withdraw(studentAccount, 1500);
 
             System.out.println(studentAccount.getUuid() + ": " + studentAccount.getBankAccountNumber());
             System.out.println(studentAccount.getUuid() + ": Studentova skola je " + studentAccount.getSchool());

@@ -1,8 +1,13 @@
 package org.example.accounts;
 
+
 import org.example.customer.Customer;
+import org.example.services.BankAccountService;
+
 
 public class StudentAccount extends BaseBankAccount {
+
+    BankAccountService bankAccountService = new BankAccountService();
 
     private String school;
 
@@ -13,15 +18,6 @@ public class StudentAccount extends BaseBankAccount {
 
     public String getSchool() {
         return school;
-    }
-
-    @Override
-    public void withdraw(double amount) {
-        if (amount > 2000) {
-            System.out.println("Student nemuze vybrat vice nez 2000 Kc najednou!");
-        } else {
-            super.withdraw(amount); //
-        }
     }
 }
 

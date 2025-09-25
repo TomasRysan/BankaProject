@@ -20,37 +20,6 @@ public class BaseBankAccount {
 
     }
 
-    public void addBalance(Double balance){
-        this.balance += balance;
-    }
-
-    public void subtractBalance(Double balance) throws IllegalArgumentException {
-        double subractBalance = this.balance - balance;
-
-        if (subractBalance < 0){
-            throw new IllegalArgumentException();
-        }
-        else if (subractBalance > 0){
-            this.balance = subractBalance;
-        }
-    }
-
-    public void deposit(double amount) {
-        if (amount > 0) {
-            balance += amount;
-            System.out.println("Vlozeno " + amount + " Kc. Novy zustatek: " + balance + " Kc");
-        }
-    }
-
-    public void withdraw(double amount) {
-        if (amount > 0 && balance >= amount) {
-            balance -= amount;
-            System.out.println("Vybrano " + amount + " Kc. Novy zustatek: " + balance + " Kc");
-        } else {
-            System.out.println("Nedostatek prostredku nebo neplatna castka!");
-        }
-    }
-
     public String getUuid() {
         return uuid;
     }
