@@ -65,7 +65,7 @@ public class Main {
             studentAccount.withdraw(1500);
 
             System.out.println(studentAccount.getUuid() + ": " + studentAccount.getBankAccountNumber());
-            System.out.println(studentAccount.getUuid() + ": Studentova škola je " + studentAccount.getSchool());
+            System.out.println(studentAccount.getUuid() + ": Studentova skola je " + studentAccount.getSchool());
         }
         catch (Exception e)
         {

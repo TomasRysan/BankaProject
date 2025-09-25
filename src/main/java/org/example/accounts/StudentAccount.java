@@ -11,10 +11,6 @@ public class StudentAccount extends BaseBankAccount {
         this.school = school;
     }
 
-    public StudentAccount(String uuid, String bankAccountNumber, Customer customer) {
-        super(uuid, bankAccountNumber, customer, 0);
-    }
-
     public String getSchool() {
         return school;
     }
