@@ -6,15 +6,16 @@ import org.example.accounts.StudentAccount;
 import org.example.customer.Customer;
 import org.example.accounts.SaveAccount;
 import org.example.data.GeneratorUUID;
+import org.example.people.BankAccountOwner;
+import org.example.serialization.BankAccountOwnerSerializationService;
+import org.example.serialization.Serialization;
 import org.example.services.BankAccountService;
 
 public class Main {
 
     public static void main(String[] args) {
 
-
-        Customer customer = new Customer("c-123", "Tomas", "Rysan");
-        System.out.println(customer.getUuid() + ": " + customer.getFirstName() + " " + customer.getLastName());
+        Customer customer = new Customer("c-123", "Tomas", "Rysan"); // bez Customer před
 
         System.out.println("== Test Bank Account ==");
         testBankAccount(customer);
@@ -24,6 +25,19 @@ public class Main {
 
         System.out.println("== Test Student Account ==");
         testStudentAccount(customer);
+
+
+        //Serializace
+
+        BankAccountOwner owner = new BankAccountOwner(customer);
+        BankAccountOwnerSerializationService ownerService = new BankAccountOwnerSerializationService();
+        String ownerJson = ownerService.Serialization(owner); // OK
+        System.out.println(ownerJson);
+
+
+        //Serializace do XML
+
+        BankAccountOwner owner2 = new BankAccountOwner(customer);
 
     }
 
@@ -70,6 +84,7 @@ public class Main {
             bankAccountService.deposit(studentAccount, 5000);
             bankAccountService.withdraw(studentAccount, 5000);
             bankAccountService.withdraw(studentAccount, 1500);
+            bankAccountService.deposit(studentAccount, 250000);
 
             System.out.println(studentAccount.getUuid() + ": " + studentAccount.getBankAccountNumber());
             System.out.println(studentAccount.getUuid() + ": Studentova skola je " + studentAccount.getSchool());

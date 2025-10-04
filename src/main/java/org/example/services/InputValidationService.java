@@ -4,13 +4,17 @@ import org.example.accounts.BaseBankAccount;
 
 public class InputValidationService {
 
-    public void DepositValidationService(BaseBankAccount account, Double balance) {
+    public boolean DepositValidationService(BaseBankAccount account, Double balance) {
 
         if (balance >= 250000) {
-            System.out.println("Balance is greater than 250000");
+            System.out.println("Vklad je vyssi nez 250000 Kc");
             System.out.println("WARNING - AML");
+
+            return false;
         } else {
-            System.out.println("Balance is less than 250000");
+            System.out.println("Vklad prosel přes AML - 250000 Kc");
+
+            return true;
         }
     }
 
