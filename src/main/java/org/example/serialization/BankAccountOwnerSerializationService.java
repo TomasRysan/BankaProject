@@ -15,7 +15,7 @@ public class BankAccountOwnerSerializationService implements Serialization {
         }
 
         BankAccountOwner owner = (BankAccountOwner) obj;
-        Customer customer = owner.setCustomer();
+        Customer customer = owner.getCustomer();
 
         StringBuilder sb = new StringBuilder();
         sb.append("{");

@@ -8,6 +8,7 @@ import org.example.accounts.SaveAccount;
 import org.example.data.GeneratorUUID;
 import org.example.people.BankAccountOwner;
 import org.example.serialization.BankAccountOwnerSerializationService;
+import org.example.serialization.BankAccountXMLSerializationService;
 import org.example.serialization.Serialization;
 import org.example.services.BankAccountService;
 
@@ -38,6 +39,16 @@ public class Main {
         //Serializace do XML
 
         BankAccountOwner owner2 = new BankAccountOwner(customer);
+
+        BankAccountXMLSerializationService xmlService = new BankAccountXMLSerializationService();
+
+        String xml = xmlService.Serialization(owner);
+        System.out.println("XML vystup:");
+        System.out.println(xml);
+
+        BankAccountOwner back = (BankAccountOwner) xmlService.Deserialization(xml);
+        System.out.println("\nNacteny objekt:");
+        System.out.println(back.getCustomer().getFirstName() + " " + back.getCustomer().getLastName());
 
     }
 
