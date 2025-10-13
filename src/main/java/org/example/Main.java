@@ -3,6 +3,8 @@ package org.example;
 import org.example.accounts.BankAccount;
 import org.example.accounts.BaseBankAccount;
 import org.example.accounts.StudentAccount;
+import org.example.card.PaymentCard;
+import org.example.card.PaymentCardFactory;
 import org.example.customer.Customer;
 import org.example.accounts.SaveAccount;
 import org.example.data.GeneratorUUID;
@@ -47,8 +49,16 @@ public class Main {
         System.out.println(xml);
 
         BankAccountOwner back = (BankAccountOwner) xmlService.Deserialization(xml);
-        System.out.println("\nNacteny objekt:");
+        System.out.println("Nacteny objekt:");
         System.out.println(back.getCustomer().getFirstName() + " " + back.getCustomer().getLastName());
+
+
+
+        //Generace Karetnich Udaju
+        System.out.println("\nCard Holder: " + customer.getFirstName() + " " + customer.getLastName());
+        PaymentCardFactory paymentCardFactory = new PaymentCardFactory();
+        paymentCardFactory.create(customer.getFirstName()+" "+customer.getLastName());
+
 
     }
 
