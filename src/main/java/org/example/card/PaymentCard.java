@@ -3,18 +3,14 @@ package org.example.card;
 public class PaymentCard {
 
     private String cardNumber;
-
     private String cvv;
-
     private String owner;
-
     private String fullExpire;
 
-    public PaymentCard(String cvv, String owner, String cardNumber) {
-        this.cvv = cvv;
-
-        this.owner = owner;
+    public PaymentCard(String cardNumber, String fullExpire, String cvv) {
         this.cardNumber = cardNumber;
+        this.fullExpire = fullExpire;
+        this.cvv = cvv;
     }
 
     public String getCardNumber() {
@@ -25,28 +21,21 @@ public class PaymentCard {
         return owner;
     }
 
-
     public String getCvv() {
         return cvv;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-
-    public void setFullExpire(String fullExpire) {
-        this.fullExpire = fullExpire;
     }
 
     public String getFullExpire() {
         return fullExpire;
     }
 
-    public PaymentCard(String fullExpire) {
-        this.fullExpire = fullExpire;
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
+    public void setFullExpire(String fullExpire) {
+        this.fullExpire = fullExpire;
+    }
 
     public void setCvv(String cvv) {
         this.cvv = cvv;
