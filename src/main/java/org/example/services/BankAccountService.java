@@ -1,19 +1,21 @@
 package org.example.services;
 
+import jakarta.inject.Inject;
 import org.example.accounts.BaseBankAccount;
 import org.example.services.BankAccountService;
 import org.example.card.PaymentCard;
 
 public class BankAccountService {
 
-    InputValidationService inputValidationService = new InputValidationService();
-    private AccountLogService logService = new AccountLogService(); // Nová služba pro logování
+    @Inject
+    private InputValidationService inputValidationService;
+
+    @Inject
+    private AccountLogService logService;
 
     public void addBalance(BaseBankAccount account, Double amount) {
         double accountBalance = account.getBalance();
 
-        // Zde by mělo být logování, ale tato metoda se zdá být interní pro jiné operace,
-        // proto ji pro přehlednost nebudeme logovat.
         accountBalance += amount;
 
         account.setBalance(accountBalance);

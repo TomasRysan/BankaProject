@@ -2,6 +2,8 @@ package org.example.accounts;
 
 import org.example.customer.Customer;
 
+import java.util.ArrayList;
+
 public abstract class BaseBankAccount {
 
     private String uuid;

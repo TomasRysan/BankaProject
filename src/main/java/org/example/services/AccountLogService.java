@@ -2,9 +2,10 @@ package org.example.services;
 
 public class AccountLogService {
 
-    private final AccountLogService logger;
-    public AccountLogService(AccountLogService accountLogService) {
-        this.logger = accountLogService;
+
+    public AccountLogService() {
+
+
     }
 
     public void logTransaction(String accountNumber, String type, double amount, double oldBalance, double newBalance) {

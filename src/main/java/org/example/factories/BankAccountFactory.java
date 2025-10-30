@@ -1,19 +1,21 @@
 package org.example.factories;
 
+import jakarta.inject.Inject;
 import org.example.accounts.BankAccount;
 import org.example.accounts.BaseBankAccount;
 import org.example.accounts.SaveAccount;
 import org.example.accounts.StudentAccount;
 import org.example.customer.Customer;
 import org.example.data.GeneratorUUID;
+import org.example.services.AccountLogService;
 
 public class BankAccountFactory {
 
-    private final GeneratorUUID generatorUUID;
+    @Inject
+    private AccountLogService logger;
 
-    public  BankAccountFactory(GeneratorUUID generatorUUID) {
-        this.generatorUUID = generatorUUID;
-    }
+    @Inject
+    private GeneratorUUID generatorUUID;
 
     public BaseBankAccount createBaseBankAccount(String uuid, Customer customer, double balance) {
         String accountNumber = generatorUUID.generate();
@@ -27,9 +29,10 @@ public class BankAccountFactory {
         return new SaveAccount(uuid, accountNumber,customer, interestRate);
     }
 
-    public StudentAccount createStudentAccount(String uuid, Customer customer, String school) {
-        String accountNumber = generatorUUID.generate();
+    public StudentAccount createStudentAccount(Customer customer, String school) {
+        String uuid = this.generatorUUID.generate();
+        String bankAccountNumber = "st-" + uuid;
 
-        return new StudentAccount(uuid, accountNumber,customer, school);
+        return new StudentAccount(uuid, bankAccountNumber, customer, school, this.logger);
     }
 }

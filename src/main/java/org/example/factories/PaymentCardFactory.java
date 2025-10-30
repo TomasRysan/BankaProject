@@ -1,23 +1,37 @@
 package org.example.factories;
 
+import com.google.inject.Singleton;
+import jakarta.inject.Inject;
 import org.example.accounts.BankAccountWithPaymentCards;
 import org.example.card.PaymentCard;
 import org.example.card.PaymentCardCvvGenerator;
 import org.example.card.PaymentCardExpireCalculator;
 import org.example.card.PaymentCardNumberGenerator;
 
+
+@Singleton
 public class PaymentCardFactory {
 
-    private final PaymentCardNumberGenerator paymentCardNumberGenerator;
-    private final PaymentCardCvvGenerator paymentCardCvvGenerator;
-    private final PaymentCardExpireCalculator paymentCardExpireCalculator;
+    @Inject
+    private PaymentCardNumberGenerator paymentCardNumberGenerator;
 
-    public PaymentCardFactory(PaymentCardNumberGenerator numberGenerator, PaymentCardCvvGenerator cvvGenerator, PaymentCardExpireCalculator  expireCalculator)
-        {
-            this.paymentCardNumberGenerator = numberGenerator;
-            this.paymentCardCvvGenerator = cvvGenerator;
-            this.paymentCardExpireCalculator = expireCalculator;
-        }
+    @Inject
+    private PaymentCardCvvGenerator paymentCardCvvGenerator;
+
+    @Inject
+    private PaymentCardExpireCalculator paymentCardExpireCalculator;
+
+
+    public PaymentCard create(String owner) {
+
+        String expireDate = paymentCardExpireCalculator.FullExpire();
+        String cardNumber = paymentCardNumberGenerator.generatePaymentCardNumber();
+        String cvv = paymentCardCvvGenerator.generateCvvNumber();
+
+        PaymentCard paymentCard = new PaymentCard(cardNumber, expireDate, cvv);
+        paymentCard.setOwner(owner);
+        return paymentCard;
+    }
 
 
     public void linkCardToAccount(BankAccountWithPaymentCards account, PaymentCard paymentCard) {

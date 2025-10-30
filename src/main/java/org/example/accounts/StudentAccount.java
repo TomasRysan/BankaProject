@@ -6,11 +6,12 @@ import org.example.services.AccountLogService;
 public class StudentAccount extends BaseBankAccount {
 
     private String school;
-    private static final AccountLogService logService = new AccountLogService();
+    private final AccountLogService logService;
 
-    public StudentAccount(String uuid, String bankAccountNumber, Customer customer, String school) {
+    public StudentAccount(String uuid, String bankAccountNumber, Customer customer, String school, AccountLogService logService) {
         super(uuid, bankAccountNumber, customer, 0.0);
         this.school = school;
+        this.logService = logService;
     }
 
     public String getSchool() {
