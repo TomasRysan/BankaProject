@@ -1,6 +1,5 @@
 package org.example.factories;
 
-import com.google.inject.Singleton;
 import jakarta.inject.Inject;
 import org.example.accounts.BankAccountWithPaymentCards;
 import org.example.card.PaymentCard;
@@ -9,7 +8,7 @@ import org.example.card.PaymentCardExpireCalculator;
 import org.example.card.PaymentCardNumberGenerator;
 
 
-@Singleton
+
 public class PaymentCardFactory {
 
     @Inject

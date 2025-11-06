@@ -23,10 +23,10 @@ public class BankAccountFactory {
         return new BankAccount(uuid, accountNumber, customer, balance);
     }
 
-    public SaveAccount createSaveBankAccount(String uuid, Customer customer, float interestRate) {
+    public SaveAccount createSaveBankAccount(String uuid, Customer customer,float initialBalance, float interestRate) {
         String accountNumber = generatorUUID.generate();
 
-        return new SaveAccount(uuid, accountNumber,customer, interestRate);
+        return new SaveAccount(uuid, accountNumber, customer, initialBalance, interestRate);
     }
 
     public StudentAccount createStudentAccount(Customer customer, String school) {

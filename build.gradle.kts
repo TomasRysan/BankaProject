@@ -9,6 +9,9 @@ repositories {
     mavenCentral()
 }
 
+
+
+
 dependencies {
 
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
@@ -16,6 +19,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.17.1")
     implementation("com.google.inject:guice:7.0.0")
+    implementation("jakarta.inject:jakarta.inject-api:2.0.1")
 }
 
 

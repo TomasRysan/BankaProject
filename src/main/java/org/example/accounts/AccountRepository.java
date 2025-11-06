@@ -11,5 +11,11 @@ public class AccountRepository {
         this.accounts = new ArrayList<>();
     }
 
-    pu
+    public void AddAccount(BaseBankAccount account) {
+        this.accounts.add(account);
+    }
+
+    public List<BaseBankAccount> getAccounts() {
+        return this.accounts;
+    }
 }

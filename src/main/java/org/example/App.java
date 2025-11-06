@@ -1,12 +1,14 @@
 package org.example;
 
 import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import org.example.accounts.*;
 import org.example.card.PaymentCard;
 import org.example.customer.Customer;
 import org.example.data.GeneratorUUID;
 import org.example.factories.BankAccountFactory;
 import org.example.factories.PaymentCardFactory;
+import org.example.interest.InterestRunnerFacade;
 import org.example.people.BankAccountOwner;
 import org.example.serialization.BankAccountOwnerSerializationService;
 import org.example.serialization.BankAccountXMLSerializationService;
@@ -15,7 +17,11 @@ import org.example.services.BankAccountService;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+@Singleton
 public class App {
+
+    @Inject
+    private AccountRepository accountRepository = new AccountRepository();
 
     @Inject
     private BankAccountService bankAccountService;
@@ -28,6 +34,9 @@ public class App {
 
     @Inject
     private GeneratorUUID generatorUUID;
+
+    @Inject
+    private InterestRunnerFacade interestRunnerFacade;
 
     public void run() {
         Customer customer = new Customer("c-123", "Tomas", "Rysan");
@@ -104,8 +113,11 @@ public class App {
     private void testSaveAccount(Customer customer)
     {
         GeneratorUUID gen = this.generatorUUID;
-        SaveAccount saveAccount = new SaveAccount("s-123",gen.generate(),customer,0);
+        SaveAccount saveAccount = new SaveAccount("s-123",gen.generate(),customer,1000F,0F);
 
+
+        accountRepository.AddAccount(saveAccount);
+        interestRunnerFacade.processAllInterest();
         try {
             System.out.println(saveAccount.getUuid() + ": " + saveAccount.getBankAccountNumber());
         }

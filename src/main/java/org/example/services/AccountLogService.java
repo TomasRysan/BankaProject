@@ -25,4 +25,14 @@ public class AccountLogService {
         System.out.println("Duvod: " + reason);
         System.out.println("---------------------------------");
     }
+
+    public void logInterestChange(String accountNumber, String type, double interest, double oldBalance, double newBalance) {
+        System.out.println("--- LOG: Interest change zaznamenana ---");
+        System.out.println("Ucet: " + accountNumber);
+        System.out.println("Typ: " + type);
+        System.out.println("Úrok: " + interest + " Kc");
+        System.out.println("Predchozi zustatek: " + oldBalance + " Kc");
+        System.out.println("Novy zustatek: " + newBalance + " Kc");
+        System.out.println("------------------------------");
+    }
 }

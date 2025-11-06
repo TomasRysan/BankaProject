@@ -86,4 +86,19 @@ public class BankAccountService {
             System.out.println("Platba kartou zamitnuta: " + reason);
         }
     }
+
+    public void InterestDeposit(BaseBankAccount account, double monthlyInterest) {
+        double oldBalance = account.getBalance();
+
+        if (monthlyInterest > 0 &&  oldBalance >= 1) {
+            account.setBalance(oldBalance + monthlyInterest);
+
+            logService.logInterestChange(account.getBankAccountNumber(), "INTEREST_CHANGE", monthlyInterest, oldBalance, account.getBalance());
+        }
+        else {
+            String reason = (oldBalance <= 0) ? "Neplatna castka" : "Nedostatek prostredku";
+            logService.logRejection(account.getBankAccountNumber(), "INTEREST_CHANGE", reason);
+        }
+
+    }
 }

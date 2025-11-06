@@ -3,22 +3,17 @@ package org.example.accounts;
 import jakarta.inject.Inject;
 import org.example.customer.Customer;
 
+import java.time.LocalDateTime;
+
 public class SaveAccount extends BaseBankAccount {
 
-    private float interestRate;
+    private float interestRate = 0.04f;
+    private LocalDateTime NextInterestRun;
 
-    @Inject
-    BaseBankAccount baseBankAccount;
-
-    public SaveAccount(String uuid, String bankAccountNumber, Customer customer, float interestRate) {
-        super(uuid,bankAccountNumber,customer, 1000);
-
-        this.interestRate = interestRate;
-
-    }
-
-    public SaveAccount(String uuid, String bankAccountNumber, Customer customer){
-        this(uuid,bankAccountNumber,customer, 0);
+    public SaveAccount(String uuid, String bankAccountNumber, Customer customer, float balance, float annualInterestRate) {
+        super(uuid, bankAccountNumber, customer, balance);
+        this.interestRate = annualInterestRate;
+        this.NextInterestRun = LocalDateTime.now().plusMinutes(5);
     }
 
     public float getInterestRate() {
@@ -28,5 +23,9 @@ public class SaveAccount extends BaseBankAccount {
     @Override
     public double getBalance() {
         return super.getBalance();
+    }
+
+    public LocalDateTime getNextInterestRun() {
+        return NextInterestRun;
     }
 }
